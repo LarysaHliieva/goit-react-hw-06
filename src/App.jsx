@@ -5,10 +5,8 @@ import { nanoid } from "nanoid";
 import { useSelector, useDispatch } from "react-redux";
 
 import ContactForm from "./components/ContactForm/ContactForm";
-import Filter from "./components/SearchBox/SearchBox";
+import SearchBox from "./components/SearchBox/SearchBox";
 import ContactList from "./components/ContactList/ContactList";
-
-import { changeFilter } from "./redux/filtersSlice";
 
 import styles from "./App.module.css";
 
@@ -19,7 +17,6 @@ function App() {
     return JSON.parse(localStorage.getItem("contacts")) ?? [];
   });
 
-  // const [filter, setFilter] = useState("");
   const dispatch = useDispatch();
   const filter = useSelector((state) => state.filters.name);
 
@@ -58,10 +55,6 @@ function App() {
     );
   };
 
-  const handleFilter = (e) => {
-    dispatch(changeFilter(e.target.value));
-  };
-
   const getFilteredContacts = () => {
     if (!filter) {
       return contacts;
@@ -83,7 +76,7 @@ function App() {
       <h1>Phonebook</h1>
       <ContactForm onSubmit={addContact} />
 
-      <Filter handleFilter={handleFilter} />
+      <SearchBox />
       <ContactList items={filteredContacts} onDelete={deleteContact} />
     </div>
   );
