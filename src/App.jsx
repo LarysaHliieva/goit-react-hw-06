@@ -1,7 +1,3 @@
-import { useEffect, useState } from "react";
-
-import { nanoid } from "nanoid";
-
 import { useSelector, useDispatch } from "react-redux";
 
 import ContactForm from "./components/ContactForm/ContactForm";
@@ -13,41 +9,17 @@ import styles from "./App.module.css";
 import "./App.css";
 
 function App() {
-  const [contacts, setContacts] = useState(() => {
-    return JSON.parse(localStorage.getItem("contacts")) ?? [];
-  });
+  // const [contacts, setContacts] = useState(() => {
+  //   return JSON.parse(localStorage.getItem("contacts")) ?? [];
+  // });
 
   const dispatch = useDispatch();
   const filter = useSelector((state) => state.filters.name);
+  const contacts = useSelector((state) => state.contacts.items);
 
-  useEffect(() => {
-    localStorage.setItem("contacts", JSON.stringify(contacts));
-  }, [contacts]);
-
-  const addContact = ({ name, number }) => {
-    if (isDublicate(name)) {
-      alert(`${name} is already in contacts.`);
-      return;
-    }
-
-    const newContact = {
-      id: nanoid(),
-      name,
-      number,
-    };
-
-    setContacts((prevContacts) => [newContact, ...prevContacts]);
-  };
-
-  const isDublicate = (name) => {
-    const normalizedName = name
-      .toLowerCase()
-      .split(" ")
-      .filter((item) => item)
-      .join(" ");
-
-    return contacts.some((item) => normalizedName === item.name.toLowerCase());
-  };
+  // useEffect(() => {
+  //   localStorage.setItem("contacts", JSON.stringify(contacts));
+  // }, [contacts]);
 
   const deleteContact = (id) => {
     setContacts((prevContacts) =>
@@ -74,7 +46,7 @@ function App() {
   return (
     <div className={styles.phonebook}>
       <h1>Phonebook</h1>
-      <ContactForm onSubmit={addContact} />
+      <ContactForm />
 
       <SearchBox />
       <ContactList items={filteredContacts} onDelete={deleteContact} />
