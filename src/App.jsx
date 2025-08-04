@@ -2,9 +2,13 @@ import { useEffect, useState } from "react";
 
 import { nanoid } from "nanoid";
 
+import { useSelector, useDispatch } from "react-redux";
+
 import ContactForm from "./components/ContactForm/ContactForm";
 import Filter from "./components/SearchBox/SearchBox";
 import ContactList from "./components/ContactList/ContactList";
+
+import { changeFilter } from "./redux/filtersSlice";
 
 import styles from "./App.module.css";
 
@@ -15,7 +19,9 @@ function App() {
     return JSON.parse(localStorage.getItem("contacts")) ?? [];
   });
 
-  const [filter, setFilter] = useState("");
+  // const [filter, setFilter] = useState("");
+  const dispatch = useDispatch();
+  const filter = useSelector((state) => state.filters.name);
 
   useEffect(() => {
     localStorage.setItem("contacts", JSON.stringify(contacts));
@@ -53,8 +59,7 @@ function App() {
   };
 
   const handleFilter = (e) => {
-    const { value } = e.target;
-    setFilter(value);
+    dispatch(changeFilter(e.target.value));
   };
 
   const getFilteredContacts = () => {
