@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { nanoid } from "nanoid";
 
 import ContactForm from "./components/ContactForm/ContactForm";
-import Filter from "./components/Filter/Filter";
+import Filter from "./components/SearchBox/SearchBox";
 import ContactList from "./components/ContactList/ContactList";
 
 import styles from "./App.module.css";
@@ -75,10 +75,9 @@ function App() {
 
   return (
     <div className={styles.phonebook}>
-      <h2>Phonebook</h2>
+      <h1>Phonebook</h1>
       <ContactForm onSubmit={addContact} />
 
-      <h2>Contacts</h2>
       <Filter handleFilter={handleFilter} />
       <ContactList items={filteredContacts} onDelete={deleteContact} />
     </div>

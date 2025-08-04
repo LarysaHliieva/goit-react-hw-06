@@ -8,9 +8,9 @@
 
 .btn:hover,
 .btn:focus {
-  color: lime;
+  color: olive;
   background-color: hsl(0, 0%, 60%);
-  border-color: lime;
+  border-color: olive;
 }
 
 .btn:active {

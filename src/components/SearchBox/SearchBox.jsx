@@ -1,9 +1,9 @@
-import styles from "./Filter.module.css";
+import styles from "./SearchBox.module.css";
 
-const Filter = ({ handleFilter }) => {
+const SearchBox = ({ handleFilter }) => {
   return (
     <label className={styles.label}>
-      Find contacts by name
+      <h3>Find contacts by name</h3>
       <input
         className={styles.input}
         onChange={handleFilter}
@@ -14,4 +14,4 @@ const Filter = ({ handleFilter }) => {
   );
 };
 
-export default Filter;
+export default SearchBox;

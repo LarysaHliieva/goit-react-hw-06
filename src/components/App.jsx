@@ -1,22 +1,22 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
-import { nanoid } from 'nanoid';
+import { nanoid } from "nanoid";
 
-import ContactForm from './ContactForm/ContactForm';
-import Filter from './Filter/Filter';
-import ContactList from './ContactList/ContactList';
+import ContactForm from "./ContactForm/ContactForm";
+import SearchBox from "./SearchBox/SearchBox";
+import ContactList from "./ContactList/ContactList";
 
-import styles from './App.module.css';
+import styles from "./App.module.css";
 
 export const App = () => {
   const [contacts, setContacts] = useState(() => {
-    return JSON.parse(localStorage.getItem('contacts')) ?? [];
+    return JSON.parse(localStorage.getItem("contacts")) ?? [];
   });
 
-  const [filter, setFilter] = useState('');
+  const [filter, setFilter] = useState("");
 
   useEffect(() => {
-    localStorage.setItem('contacts', JSON.stringify(contacts));
+    localStorage.setItem("contacts", JSON.stringify(contacts));
   }, [contacts]);
 
   const addContact = ({ name, number }) => {
@@ -31,24 +31,26 @@ export const App = () => {
       number,
     };
 
-    setContacts(prevContacts => [newContact, ...prevContacts]);
+    setContacts((prevContacts) => [newContact, ...prevContacts]);
   };
 
-  const isDublicate = name => {
+  const isDublicate = (name) => {
     const normalizedName = name
       .toLowerCase()
-      .split(' ')
-      .filter(item => item)
-      .join(' ');
+      .split(" ")
+      .filter((item) => item)
+      .join(" ");
 
-    return contacts.some(item => normalizedName === item.name.toLowerCase());
+    return contacts.some((item) => normalizedName === item.name.toLowerCase());
   };
 
-  const deleteContact = id => {
-    setContacts(prevContacts => prevContacts.filter(item => item.id !== id));
+  const deleteContact = (id) => {
+    setContacts((prevContacts) =>
+      prevContacts.filter((item) => item.id !== id)
+    );
   };
 
-  const handleFilter = e => {
+  const handleFilter = (e) => {
     const { value } = e.target;
     setFilter(value);
   };
@@ -61,7 +63,7 @@ export const App = () => {
     const normalizedFilter = filter.toLowerCase();
 
     return contacts.filter(
-      item =>
+      (item) =>
         item.name.toLowerCase().includes(normalizedFilter) ||
         item.number.toLowerCase().includes(normalizedFilter)
     );

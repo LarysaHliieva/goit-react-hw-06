@@ -1,0 +1,18 @@
+.contact {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  border: 1px solid grey;
+  border-radius: 4px;
+  padding: 5px;
+}
+
+.contact__btn {
+  margin-left: 30px;
+}
+
+.icon {
+  margin-right: 5px;
+  color: olive;
+}
