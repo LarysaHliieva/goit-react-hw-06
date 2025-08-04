@@ -18,6 +18,8 @@ const ContactForm = () => {
     number: "",
   });
 
+  const { name, number } = state;
+
   const hangleChange = (e) => {
     const { name, value } = e.target;
     setState((prevState) => ({
@@ -29,22 +31,10 @@ const ContactForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    onSubmit(state);
-
-    resetForm();
-  };
-
-  const onSubmit = ({ name, number }) => {
     if (isDublicate(name)) {
       alert(`${name} is already in contacts.`);
       return;
     }
-
-    // const newContact = {
-    //   id: nanoid(),
-    //   name,
-    //   number,
-    // };
 
     dispatch(
       addContact({
@@ -53,6 +43,8 @@ const ContactForm = () => {
         number,
       })
     );
+
+    resetForm();
   };
 
   const isDublicate = (name) => {
@@ -71,8 +63,6 @@ const ContactForm = () => {
       number: "",
     });
   };
-
-  const { name, number } = state;
 
   return (
     <form onSubmit={handleSubmit} className={styles.form}>
